@@ -1,0 +1,117 @@
+﻿@model IEnumerable<WebBanHang.Models.Giohang>
+
+@{
+    ViewBag.Title = "DatHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h4>
+    Đặt hàng <br />
+
+</h4>
+
+<tr style="font-weight:bold; text-align:left">
+    <td colspan="4">
+        @Html.ActionLink("Trở về giỏ hàng", "Giohang", "GioHang")
+    </td>
+</tr>
+<table class="table">
+    <tr>
+        <th></th>
+        <th style="width: 250px">@Html.DisplayNameFor(model => model.tenSP)</th>
+
+        <th>@Html.DisplayNameFor(model => model.giaBan)</th>
+        <th>@Html.DisplayNameFor(model => model.iSoluong)</th>
+        <th>@Html.DisplayNameFor(model => model.dThanhtien)</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td> <img src="@item.hinh" width="180" /> </td>
+            <td style="width:250px">
+                <div style="margin-top:80px; margin-bottom:80px">
+                    <b>@Html.DisplayFor(modelItem => item.tenSP)</b>
+                </div>
+            </td>
+            @using (Html.BeginForm("CapnhatGiohang", "Giohang", new { @id = item.idSP }))
+            {
+                <td>
+                    <div style="margin-top: 80px;">
+                        <b>@String.Format("{0:0,0}", item.giaBan)₫</b>
+                    </div>
+                </td>
+                <td style="width:100px">
+                    <div style="margin-top: 75px;">
+                        <b>@Html.DisplayFor(modelItem => item.iSoluong)</b>
+                    </div>
+                </td>
+                <td>
+                    <div style="margin-top: 80px; margin-bottom: 80px;">
+                        <b>@String.Format("{0:0,0}", item.dThanhtien)₫</b>
+                    </div>
+                </td>
+            }
+        </tr>
+    }
+    <tr style="font-weight:bold; text-align:left; color:red">
+        <td colspan="2"> Số loại sản phẩm: @ViewBag.Tongsoluongsanpham </td>
+        <td colspan="2"> Số lượng sản phẩm: @ViewBag.Tongsoluong </td>
+        <td colspan="4">
+            Tổng tiền: @String.Format("{0:0,0}", @ViewBag.Tongtien)₫
+        </td>
+    </tr>
+</table>
+
+@using WebBanHang.Models
+<h2 style="text-align:center">Thông tin đặt hàng</h2>
+@{
+    AspNetUsers tk = (AspNetUsers)Session["TaiKhoan"];
+}
+<table align="center">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <tr style="height:40px">
+            <td>Họ tên khách hàng: </td>
+            <td style="font-weight:bold;"> <div style="margin-left:10px">@tk.Name</div></td>
+        </tr>
+        <tr style="height:40px">
+            <td>Email: </td>
+            <td style="font-weight:bold;"> <div style="margin-left:10px">@tk.Email</div></td>
+        </tr>
+        <tr style="height:40px">
+            <td>Địa chỉ: </td>
+            <td style="font-weight:bold;"> <div style="margin-left:10px">@tk.Diachi</div></td>
+        </tr>
+        <tr style="height:40px">
+            <td>Ðiện thoại: </td>
+            <td style="font-weight:bold;"> <div style="margin-left:10px">@tk.PhoneNumber</div></td>
+        </tr>
+        <tr style="height:40px">
+            <td>Ngày đặt: </td>
+            <td style="font-weight:bold;"> <div style="margin-left:10px">@DateTime.Now.ToShortDateString()</div></td>
+        </tr>
+        <tr style="height:40px">
+            <td>Ngày giao: </td>
+            <td style="font-weight:bold;"> <div style="margin-left:10px"><input style="width:15rem" class="form-control" type="date" name="NgayGiao" required /></div></td>
+        </tr>
+
+        <tr>
+            <td>Hình thức thanh toán</td>
+            <td>
+                <select style="margin-left:10px; width:15rem" name="httt" class="form-control" id="inputGroupSelect01">
+                    <option selected value="1">Thanh toán khi nhận hàng</option>
+                    <option value="2">Thanh toán bằng ví VNPAY</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr style="height:40px">
+            <td></td>
+            <td style="font-weight:bold;"> <div style="margin-left:10px"><input type="submit" value="Xác nhận" class="btn btn-success" /></div></td>
+        </tr>
+    }
+</table>

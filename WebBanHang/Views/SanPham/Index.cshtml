@@ -1,0 +1,86 @@
+﻿@model IEnumerable<WebBanHang.Models.tb_SANPHAM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if ((string)Session["Role"] == "admin")
+{
+    <h2>QUẢN LÝ SẢN PHẨM</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>
+                TÊN SẢN PHẨM
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HANG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GIABAN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HINHANH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MOTA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TRANGTHAI)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TENANPHAM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HANG)
+                </td>
+                <td>
+                    @String.Format("{0:0,0}", item.GIABAN)₫
+                </td>
+                <td>
+                    <img src="@item.HINHANH" style="height:150px; width:150px; object-fit:cover" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MOTA)
+                </td>
+                <td>
+
+                    @if (item.TRANGTHAI == true)
+                    {
+                        <p style="color:green">
+                            Còn hàng
+                        </p>
+                    }
+                    else
+                    {
+                        <p style="color:red">
+                            Hết hàng
+                        </p>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IDSANPHAM }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IDSANPHAM }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IDSANPHAM })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
+else
+{
+    <h4>Bạn không có quyền truy cập, vui lòng thao tác lại.</h4>
+}
+

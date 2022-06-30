@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "LichSuDatHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>MÁY ĐÃ XUỐNG TIỀN</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>
+            Hình ảnh
+        </th>
+        <th>
+            Sản phẩm
+        </th>
+
+        <th>
+            Hãng
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Thành tiền
+        </th>
+        <th>
+            Trạng thái
+        </th>
+        <th>
+            Thanh toán
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        <img src="@item.sp.HINHANH" style="height:150px; width:150px; object-fit:cover" />
+
+    </td>
+    <td>
+        @item.sp.TENANPHAM
+    </td>
+
+    <td>
+        @item.sp.HANG
+    </td>
+    <td>
+        @item.ghct.SOLUONG
+    </td>
+    <td>
+        <p class="card-text" style="color: red; font-weight: 700">@String.Format("{0:0,0}", item.ghct.THANHTIEN)₫</p>
+    </td>
+    <td>
+        @item.gh.TRANGTHAI
+    </td>
+    <td>
+        @if (item.gh.THANHTOAN)
+        {
+            <p style="color:green">Đã thanh toán</p>
+        }
+        else
+        {
+            <p style="color:red">Chưa thanh toán</p>
+        }
+    </td>
+</tr>
+}
+
+</table>

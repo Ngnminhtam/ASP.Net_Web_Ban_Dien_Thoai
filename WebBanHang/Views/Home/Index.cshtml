@@ -1,0 +1,138 @@
+﻿@model IEnumerable<WebBanHang.Models.tb_SANPHAM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin-bottom:3rem" id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+            <img src="~/Content/images/banner1.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+            <img src="~/Content/images/banner2.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/Content/images/banner3.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/Content/images/banner4.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<h5 style="font-weight:700">THƯƠNG HIỆU HÀNG ĐẦU</h5>
+<hr />
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <a href="@Url.Action("Index", new { @thuonghieu = "Apple"})">
+                <img src="~/Content/images/ap.png" style="height:120px; width: 120px" />
+            </a>
+        </div>
+        <div class="swiper-slide">
+            <a href="@Url.Action("Index", new { @thuonghieu = "Samsung"})">
+                <img src="~/Content/images/ss.png" style="height:120px; width: 120px" />
+            </a>
+        </div>
+        <div class="swiper-slide">
+            <a href="@Url.Action("Index", new { @thuonghieu = "Xiaomi"})">
+                <img src="~/Content/images/xm.png" style="height:120px; width: 120px" />
+            </a>
+        </div>
+        <div class="swiper-slide">
+            <a href="@Url.Action("Index", new { @thuonghieu = "Huawei"})">
+                <img src="~/Content/images/hw.png" style="height:120px; width: 120px" />
+            </a>
+        </div>
+        <div class="swiper-slide">
+            <a href="@Url.Action("Index", new { @thuonghieu = "Google"})">
+                <img src="~/Content/images/gg.png" style="height:120px; width: 120px" />
+            </a>
+        </div>
+        <div class="swiper-slide">
+            <a href="@Url.Action("Index", new { @thuonghieu = "Oppo"})">
+                <img src="~/Content/images/op.png" style="height:120px; width: 120px" />
+            </a>
+        </div>
+        <div class="swiper-slide">
+            <a href="@Url.Action("Index", new { @thuonghieu = "Nokia"})">
+                <img src="~/Content/images/nk.png" style="height:120px; width: 120px" />
+            </a>
+        </div>
+        <div class="swiper-slide">
+            <a href="@Url.Action("Index", new { @thuonghieu = "Sony"})">
+                <img src="~/Content/images/sn.png" style="height:120px; width: 120px" />
+            </a>
+        </div>
+        <div class="swiper-slide">
+            <a href="@Url.Action("Index", new { @thuonghieu = "Vivo"})">
+                <img src="~/Content/images/vv.png" style="height:120px; width: 120px" />
+            </a>
+        </div>
+    </div>
+    <br />
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+</div>
+
+
+<h5 style="font-weight:700; margin-top:2rem">SẢN PHẨM</h5>
+
+
+@if (ViewBag.count != 0) { 
+    <hr />
+<div class="row row-cols-1 row-cols-md-5 g-4">
+
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card shadow card-hover" style="border-radius:8px">
+                <a href="@Url.Action("Details", "SanPham", new { @id=item.IDSANPHAM})">
+                    <img src=".@item.HINHANH" class="card-img-top" alt="..." style="border-radius:8px; margin-top:1rem">
+                </a>
+                <div class="card-body">
+                    <h6 class="card-title" style="font-weight:700">@item.TENANPHAM</h6>
+                    <p class="card-text" style="color: red; font-weight: 700">@String.Format("{0:0,0}", item.GIABAN)₫</p>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+}
+else
+{
+    <h4>
+        Hiện tại chưa có sản phẩm nào trong danh mục này.
+    </h4>
+}
+
+
+
+
+

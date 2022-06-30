@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <div class="btn-group dropstart">
+                <img data-bs-toggle="dropdown" aria-expanded="false" src="~/Content/images/none.png" style="height:42px; width:42px; border-radius:50%" />
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item active" href="#">Thông tin tài khoản</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("LichSuDatHang", "Giohang")">Lịch sử đơn hàng</a></li>
+                    <li><a style="color:red" class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+        <a class="btn btn-warning" href="@Url.Action("Login", "Account", routeValues: null)">Đăng nhập</a>
+    </ul>
+}

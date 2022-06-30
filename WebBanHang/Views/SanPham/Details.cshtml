@@ -1,0 +1,110 @@
+﻿@model WebBanHang.Models.tb_SANPHAM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Thông tin sản phẩm</h4>
+    <hr />
+
+    <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+        <div class="carousel-inner" style="height: 350px; border-radius: 1rem">
+            <div class="carousel-item active">
+                <img src="~/Content/images/banner.png" style="border-radius:1rem" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Content/images/banner.png" style="border-radius:1rem" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Content/images/banner.png" style="border-radius:1rem" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            <img class="hinh-hover" src="@Model.HINHANH" style="width:100%; height:auto; object-fit:cover" />
+        </div>
+        <div class="col-3 card" style="padding:1rem; margin-right:1rem">
+            <h6>Thông tin sản phẩm</h6>
+            <hr />
+            <p style="margin:0"><b>Hãng sản phẩm</b></p>
+            <p>@Model.HANG</p>
+
+            <p style="margin:0"><b>Trạng thái</b></p>
+            @if (Model.TRANGTHAI)
+            {
+                <p style="color:green">Còn hàng</p>
+            }
+            else
+            {
+                <p style="color:red">Hết hàng</p>
+            }
+
+            <p style="margin:0"><b>Giá bán</b></p>
+            <h5 class="card-text" style="color:red; font-weight:700;">@String.Format("{0:0,0}", Model.GIABAN)₫</h5>
+
+        </div>
+        <div class="col card" style="padding:1rem">
+            <h6>Mô tả</h6>
+            <hr />
+            <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 6;overflow: hidden; text-align:justify" class="card-text">@Model.MOTA</p>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-primary mb-3" style="width:100%" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Xem thêm...
+            </button>
+
+            @if (Model.TRANGTHAI)
+            {
+                <a class="btn btn-warning mb-3" style="width:100%"
+                   href="@Url.Action("ThemGioHang","Giohang", new {@id=Model.IDSANPHAM, @strURL=Request.Url.ToString()})">
+                    Thêm giỏ hàng
+                </a>
+            }
+            else
+            {
+                <button class="btn btn-danger mb-3" style="width:100%" disabled >
+                    Hết hàng - Liên hệ : 0987654321.
+                </button>
+            }
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">@Model.TENANPHAM</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            @Model.MOTA
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <h6>Chính sách</h6>
+        <hr style="width:80%" />
+        <p>Miễn đổi trả, miễn bảo hành</p>
+
+        
+    </div>
+    </div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDSANPHAM }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
