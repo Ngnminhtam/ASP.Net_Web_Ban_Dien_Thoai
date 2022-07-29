@@ -10,8 +10,16 @@
             <div class="btn-group dropstart">
                 <img data-bs-toggle="dropdown" aria-expanded="false" src="~/Content/images/none.png" style="height:42px; width:42px; border-radius:50%" />
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item active" href="#">Thông tin tài khoản</a></li>
-                    <li><a class="dropdown-item" href="@Url.Action("LichSuDatHang", "Giohang")">Lịch sử đơn hàng</a></li>
+                    @if ((string)Session["Role"] == "admin")
+                    {
+                        <li><a class="dropdown-item" href="@Url.Action("Create", "SanPham")">Quản lý website</a></li>
+                    }
+                    <li><a class="dropdown-item" href="@Url.Action("Details", "Users", new { @id = (string)Session["Id"]})">Thông tin tài khoản</a></li>
+                    @if ((string)Session["Role"] != "admin")
+                    {
+                        <li><a class="dropdown-item" href="@Url.Action("LichSuDatHang", "Giohang")">Lịch sử đơn hàng</a></li>
+                    }
+                    
                     <li><a style="color:red" class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a></li>
                 </ul>
             </div>

@@ -1,7 +1,7 @@
 ﻿@model WebBanHang.Models.tb_SANPHAM
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.TENANPHAM;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -66,14 +66,25 @@
 
             @if (Model.TRANGTHAI)
             {
-                <a class="btn btn-warning mb-3" style="width:100%"
-                   href="@Url.Action("ThemGioHang","Giohang", new {@id=Model.IDSANPHAM, @strURL=Request.Url.ToString()})">
-                    Thêm giỏ hàng
-                </a>
+                if ((string)Session["Role"] != "admin")
+                {
+                    <a class="btn btn-warning mb-3" style="width:100%"
+                       href="@Url.Action("ThemGioHang", "Giohang", new { @id = Model.IDSANPHAM, @strURL = Request.Url.ToString() })">
+                        Thêm giỏ hàng
+                    </a>
+                }
+                else
+                {
+                    <a class="btn btn-warning mb-3" style="width:100%"
+                       href="@Url.Action("Edit", "SanPham", new { @id = Model.IDSANPHAM})">
+                        Chỉnh sửa sản phẩm
+                    </a>
+                }
+
             }
             else
             {
-                <button class="btn btn-danger mb-3" style="width:100%" disabled >
+                <button class="btn btn-danger mb-3" style="width:100%" disabled>
                     Hết hàng - Liên hệ : 0987654321.
                 </button>
             }

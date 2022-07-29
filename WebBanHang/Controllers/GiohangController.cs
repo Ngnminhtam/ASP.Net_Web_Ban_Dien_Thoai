@@ -66,6 +66,15 @@ namespace WebBanHang.Controllers
             return View(lstAll.OrderByDescending(p=> p.gh.IDGIOHANG));
         }
 
+        public ActionResult Huy(int id)
+        {
+            tb_GIOHANG gh = data.tb_GIOHANG.FirstOrDefault(p => p.IDGIOHANG == id);
+
+            gh.TRANGTHAI = "Đã hủy";
+            data.SaveChanges();
+            return RedirectToAction("LichSuDatHang");
+        }
+
         /*public ActionResult danhGia(int idSP, int idDH, int sao)
         {
             var donHang = data.tb_DonHang_SanPhams.First(m => m.idDonHang == idDH && m.idSP == idSP);

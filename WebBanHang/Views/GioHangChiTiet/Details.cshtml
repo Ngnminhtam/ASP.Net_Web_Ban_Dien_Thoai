@@ -1,0 +1,51 @@
+﻿@model WebBanHang.Models.tb_GIOHANGCHITIET
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tb_GIOHANGCHITIET</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_GIOHANG.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_GIOHANG.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_SANPHAM.TENANPHAM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_SANPHAM.TENANPHAM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SOLUONG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SOLUONG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.THANHTIEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.THANHTIEN)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

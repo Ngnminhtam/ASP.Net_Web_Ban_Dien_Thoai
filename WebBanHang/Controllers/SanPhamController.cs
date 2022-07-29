@@ -59,6 +59,9 @@ namespace WebBanHang.Controllers
             listhang.Add("Sony");
             listhang.Add("Vivo");
             ViewBag.HANG = new SelectList(listhang);
+
+            ViewBag.listsanpham = db.tb_SANPHAM.ToList();
+
             return View();
         }
 
@@ -85,7 +88,7 @@ namespace WebBanHang.Controllers
                 tb_SANPHAM.TRANGTHAI = true;
                 db.tb_SANPHAM.Add(tb_SANPHAM);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View(tb_SANPHAM);
@@ -103,6 +106,8 @@ namespace WebBanHang.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.listsanpham = db.tb_SANPHAM.ToList();
             return View(tb_SANPHAM);
         }
 
@@ -117,7 +122,7 @@ namespace WebBanHang.Controllers
             {
                 db.Entry(tb_SANPHAM).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit");
             }
             return View(tb_SANPHAM);
         }

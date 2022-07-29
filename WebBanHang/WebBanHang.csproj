@@ -175,10 +175,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DanhGiaController.cs" />
+    <Compile Include="Controllers\GioHangChiTietController.cs" />
     <Compile Include="Controllers\GiohangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,6 +207,7 @@
     <Compile Include="VNPay\Util.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\script.sql" />
     <Content Include="Content\bootstrap\bootstrap-grid.css" />
     <Content Include="Content\bootstrap\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap\bootstrap-grid.rtl.css" />
@@ -221,6 +224,7 @@
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap\bootstrap.rtl.min.css" />
+    <Content Include="Content\bootstrap\sidebars.css" />
     <Content Include="Content\bootstrap\Swiper.css" />
     <Content Include="Content\css\reset.css" />
     <Content Include="Content\images\ap.png" />
@@ -301,10 +305,19 @@
     <Content Include="Views\Giohang\LichSuDatHang.cshtml" />
     <Content Include="Views\Giohang\PaymentConfirm.cshtml" />
     <Content Include="Views\DanhGia\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\GioHangChiTiet\Create.cshtml" />
+    <Content Include="Views\GioHangChiTiet\Delete.cshtml" />
+    <Content Include="Views\GioHangChiTiet\Details.cshtml" />
+    <Content Include="Views\GioHangChiTiet\Edit.cshtml" />
+    <Content Include="Views\GioHangChiTiet\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Content\bootstrap\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap\bootstrap.rtl.css.map" />

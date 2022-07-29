@@ -26,6 +26,7 @@
         <th>
             Thành tiền
         </th>
+        <th>Ngày đặt</th>
         <th>
             Trạng thái
         </th>
@@ -37,7 +38,10 @@
 @foreach (var item in Model) {
 <tr>
     <td>
-        <img src="@item.sp.HINHANH" style="height:150px; width:150px; object-fit:cover" />
+        <a href="@Url.Action("Details", "SanPham", new { @id = item.sp.IDSANPHAM})">
+            <img src="@item.sp.HINHANH" style="height:150px; width:150px; object-fit:cover" />
+
+        </a>
 
     </td>
     <td>
@@ -54,18 +58,75 @@
         <p class="card-text" style="color: red; font-weight: 700">@String.Format("{0:0,0}", item.ghct.THANHTIEN)₫</p>
     </td>
     <td>
-        @item.gh.TRANGTHAI
+        @item.gh.NGAYDAT
     </td>
-    <td>
-        @if (item.gh.THANHTOAN)
-        {
-            <p style="color:green">Đã thanh toán</p>
-        }
-        else
-        {
-            <p style="color:red">Chưa thanh toán</p>
-        }
-    </td>
+    @if (item.gh.TRANGTHAI == "Chờ xử lý")
+    {
+        <td style="font-weight: 700; color: orange">
+            Chờ xử lý
+            <button style="width:100%" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#huy_@item.gh.IDGIOHANG@item.sp.IDSANPHAM">
+                <i class="bi bi-x-square-fill"></i> Hủy đơn
+            </button>
+        </td>
+
+        <!-- Modal huy -->
+        <div class="modal fade" id="huy_@item.gh.IDGIOHANG@item.sp.IDSANPHAM" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Xác nhận hủy đơn hàng?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                        <a href="@Url.Action("Huy", "Giohang", new { @id = item.gh.IDGIOHANG})" class="btn btn-danger">Xác nhận</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (item.gh.TRANGTHAI == "Đã thanh toán")
+    {
+        <td style="font-weight: 700; color:  green">
+            Đã thanh toán
+        </td>
+    }
+    else if (item.gh.TRANGTHAI == "Đang giao hàng")
+    {
+        <td style="font-weight: 700; color:  blue">
+            Đang giao hàng...
+        </td>
+
+
+    }
+
+    else if (item.gh.TRANGTHAI == "Hoàn tất")
+    {
+        <td style="font-weight: 700; color: orange">
+            <i class="bi bi-coin"></i> Hoàn tất
+        </td>
+
+    }
+    else if (item.gh.TRANGTHAI == "Đã hủy")
+    {
+        <td style="font-weight: 700; color: gray">
+            Đã hủy
+        </td>
+
+    }
+
+    @if (item.gh.THANHTOAN == true)
+    {
+        <td style="font-weight: 700; color:  green">
+            Đã thanh toán
+        </td>
+    }
+    else
+    {
+        <td style="font-weight: 700; color: red">
+            Chưa thanh toán
+        </td>
+    }
 </tr>
 }
 

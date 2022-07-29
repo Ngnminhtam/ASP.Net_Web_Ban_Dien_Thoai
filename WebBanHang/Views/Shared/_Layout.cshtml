@@ -45,17 +45,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                        @if ((string)Session["Role"] == "admin")
-                        {
-                            <li>
-                                <a class="btn btn-primary" href="@Url.Action("Index", "SanPham")">Quản lý sản phẩm</a>
-                            </li>
-                        }
-
-
-                        @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                        <li>
+                            <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Bản đồ</a>
+                        </li>
                     </ul>
+                    
+
                     <div class="btn-group me-2">
                         <button style="width:160px" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             Thương hiệu
@@ -116,9 +111,6 @@
                         </form>
                     }
 
-
-
-
                     @Html.Partial("~/Views/Giohang/GiohangPartial.cshtml")
                     @Html.Partial("_LoginPartial")
                 </div>
@@ -150,10 +142,24 @@
                 </div>
             </div>
         </div>*@
-    <div style="margin-top:5rem ; z-index:1" class="container body-content">
-        @RenderBody()
-
+<div style="margin-top:5rem ; z-index:1" class="container body-content">
+    @RenderBody()
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Bản đồ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Trường Đại học Nông Lâm TP.HCM, khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.2145254769107!2d106.78957301388878!3d10.871281660410538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOw7RuZyBMw6JtIFRwLiBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1657821050184!5m2!1svi!2s" width="764" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
     <footer class="container body-content" style="z-index: 2">
         <hr />
         <div class="row" style="margin-bottom:5rem; color:black">
